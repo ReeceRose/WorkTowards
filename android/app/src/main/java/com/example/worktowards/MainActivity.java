@@ -1,4 +1,4 @@
-package com.example.worktowards;
+package com.reecerose.worktowards;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;
