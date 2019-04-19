@@ -4,7 +4,7 @@ import 'views/home.dart';
 
 void main() => runApp(
       MaterialApp(
-        title: 'Flutter UI',
+        title: 'Work Towards',
         initialRoute: '/',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
