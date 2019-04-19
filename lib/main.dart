@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'views/home.dart';
+import 'views/settings.dart';
 
 void main() => runApp(
       MaterialApp(
@@ -12,6 +13,7 @@ void main() => runApp(
         ),
         routes: {
           '/': (context) => HomePage(),
+          '/settings': (context) => SettingsPage(),
         },
       ),
     );
