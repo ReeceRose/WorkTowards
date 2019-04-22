@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_circular_chart/flutter_circular_chart.dart';
+
 class OverviewPage extends StatefulWidget {
   @override
   _OverviewPageState createState() => _OverviewPageState();
@@ -139,32 +141,8 @@ class _OverviewPageState extends State<OverviewPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Container(
-                      width: MediaQuery.of(context).size.width / 2.5,
-                      height: MediaQuery.of(context).size.width / 2.5,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(15.0),
-                        ),
-                        color: Colors.grey.shade500,
-                      ),
-                      child: Column(
-                        children: <Widget>[Text('here')],
-                      ),
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width / 2.5,
-                      height: MediaQuery.of(context).size.width / 2.5,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(15.0),
-                        ),
-                        color: Colors.grey.shade500,
-                      ),
-                      child: Column(
-                        children: <Widget>[Text('here')],
-                      ),
-                    ),
+                    _buildChart(title: 'Item One', completed: 15.0),
+                    _buildChart(title: 'Item Two', completed: 100.0),
                   ],
                 ),
               ],
@@ -181,6 +159,55 @@ class _OverviewPageState extends State<OverviewPage> {
         _calculatedPrice = double.parse(
             (_itemPrice * (_includeTax ? _taxRate : 1)).toStringAsPrecision(4));
       },
+    );
+  }
+
+  Container _buildChart(
+      {double completed = 33.33,
+      Color completedColour = Colors.blue,
+      Color remainingColour = Colors.blueGrey,
+      String title = ""}) {
+    final double deviceWidth = MediaQuery.of(context).size.width;
+    final GlobalKey<AnimatedCircularChartState> _chartKey =
+        new GlobalKey<AnimatedCircularChartState>();
+    return Container(
+      width: deviceWidth / 2.5,
+      height: deviceWidth / 2.5,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(
+            Radius.circular(15.0),
+          ),
+          border: Border.all(color: Colors.grey.shade500)),
+      child: Column(
+        children: <Widget>[
+          AnimatedCircularChart(
+            key: _chartKey,
+            size: Size(deviceWidth / 3, deviceWidth / 3),
+            initialChartData: <CircularStackEntry>[
+              new CircularStackEntry(
+                <CircularSegmentEntry>[
+                  new CircularSegmentEntry(
+                    completed,
+                    completedColour,
+                    rankKey: 'completed',
+                  ),
+                  new CircularSegmentEntry(
+                    100 - completed,
+                    remainingColour,
+                    rankKey: 'remaining',
+                  ),
+                ],
+                rankKey: 'progress',
+              ),
+            ],
+            holeLabel: '${completed.toStringAsPrecision(4)}%',
+            chartType: CircularChartType.Radial,
+            edgeStyle: SegmentEdgeStyle.round,
+            percentageValues: true,
+          ),
+          Text(title)
+        ],
+      ),
     );
   }
 }
