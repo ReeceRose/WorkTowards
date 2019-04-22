@@ -25,14 +25,19 @@ class _HomePageState extends State<HomePage>
       appBar: AppBar(
         elevation: 0.0,
         centerTitle: true,
-        title: Text(
-          'Work Towards',
-          style: TextStyle(
-            color: Colors.black,
-            fontFamily: 'Inconsolata',
-            fontSize: 25.0,
-          ),
+        title: Image.asset(
+          'assets/images/logo.png',
+          width: 125,
+          fit: BoxFit.cover,
         ),
+        // title: Text(
+        //   'Work Towards',
+        //   style: TextStyle(
+        //     color: Colors.black,
+        //     fontFamily: 'Inconsolata',
+        //     fontSize: 25.0,
+        //   ),
+        // ),
         actions: <Widget>[
           IconButton(
             onPressed: () {},

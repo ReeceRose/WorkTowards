@@ -22,12 +22,21 @@ class _OverviewPageState extends State<OverviewPage> {
             width: inputWidth,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20.0),
-              color: Colors.grey.shade100,
+              color: Colors.grey.shade50,
             ),
             child: Padding(
               padding: EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 15.0),
               child: Column(
                 children: <Widget>[
+                  Text(
+                    'Quick Calculate',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15.0,
+                  ),
                   TextField(
                     decoration: InputDecoration(
                       labelText: 'Enter Price',
@@ -80,7 +89,7 @@ class _OverviewPageState extends State<OverviewPage> {
                     ),
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
                       Text('Include Tax?'),
                       Switch(
