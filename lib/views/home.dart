@@ -23,16 +23,16 @@ class _HomePageState extends State<HomePage>
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        elevation: 0.0,
+        elevation: 0.5,
         centerTitle: true,
         title: Image.asset(
           'assets/images/logo.png',
-          width: 125,
+          width: 150,
           fit: BoxFit.cover,
         ),
         // title: Text(
         //   'Work Towards',
-        //   style: TextStyle(
+        //             style: TextStyle(
         //     color: Colors.black,
         //     fontFamily: 'Inconsolata',
         //     fontSize: 25.0,
