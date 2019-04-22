@@ -45,7 +45,6 @@ class _HomePageState extends State<HomePage> {
                 height: 15.0,
               ),
               Container(
-                width: inputWidth,
                 child: TextField(
                   decoration: InputDecoration(
                     labelStyle: TextStyle(fontFamily: 'Bungee'),
@@ -76,7 +75,6 @@ class _HomePageState extends State<HomePage> {
                       height: 15.0,
                     ),
                     Container(
-                      width: inputWidth,
                       child: TextField(
                         decoration: InputDecoration(
                           labelStyle: TextStyle(fontFamily: 'Bungee'),
@@ -104,7 +102,6 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Container(
-                width: inputWidth,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -139,7 +136,8 @@ class _HomePageState extends State<HomePage> {
     setState(
       () {
         print(_itemPrice);
-        _calculatedPrice = (_itemPrice * (_includeTax ? _taxRate : 1)).roundToDouble();
+        _calculatedPrice =
+            (_itemPrice * (_includeTax ? _taxRate : 1)).roundToDouble();
       },
     );
   }
