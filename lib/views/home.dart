@@ -1,140 +1,83 @@
 import 'package:flutter/material.dart';
 
+import 'overview.dart';
+import 'settings.dart';
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  bool _includeTax = true;
-  double _itemPrice = 0.0;
-  double _taxRate = 1.13;
-  double _calculatedPrice = 0.0;
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
+  TabController tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    tabController = TabController(length: 3, vsync: this);
+  }
+
   @override
   Widget build(BuildContext context) {
-    double inputWidth = MediaQuery.of(context).size.width / 1.15;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0.0,
         centerTitle: true,
         title: Text(
-          'Home',
+          'Work Towards',
           style: TextStyle(
             color: Colors.black,
             fontFamily: 'Inconsolata',
             fontSize: 25.0,
           ),
         ),
+        actions: <Widget>[
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.add),
+            color: Colors.black,
+          )
+        ],
         backgroundColor: Colors.white,
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Container(
-            alignment: Alignment(0, 0),
-            child: Container(
-              width: inputWidth,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20.0),
-                color: Colors.grey.shade100,
-              ),
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 15.0),
-                child: Column(
-                  children: <Widget>[
-                    TextField(
-                      decoration: InputDecoration(
-                        labelText: 'Enter Price',
-                        fillColor: Colors.white,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(25.0),
-                          borderSide: BorderSide(),
-                        ),
-                      ),
-                      onChanged: (value) {
-                        setState(
-                          () {
-                            _itemPrice = double.parse(value);
-                          },
-                        );
-                        _calculateTax();
-                      },
-                      textAlign: TextAlign.center,
-                      keyboardType: TextInputType.number,
-                    ),
-                    Visibility(
-                      visible: _includeTax,
-                      child: Column(
-                        children: <Widget>[
-                          SizedBox(
-                            height: 10.0,
-                          ),
-                          TextField(
-                            decoration: InputDecoration(
-                              labelText: 'Enter Tax Rate',
-                              fillColor: Colors.white,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(25.0),
-                                borderSide: BorderSide(),
-                              ),
-                            ),
-                            onChanged: (value) {
-                              setState(
-                                () {
-                                  // this will give us a number like 1.XX
-                                  _taxRate = (double.parse(value) / 100) + 1;
-                                },
-                              );
-                              _calculateTax();
-                            },
-                            textAlign: TextAlign.center,
-                            keyboardType: TextInputType.number,
-                          ),
-                        ],
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text('Include Tax?'),
-                        Switch(
-                          value: _includeTax,
-                          onChanged: (value) {
-                            setState(
-                              () {
-                                _includeTax = value;
-                              },
-                            );
-                            _calculateTax();
-                          },
-                          activeColor: Colors.blue,
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text('Total'),
-                        Text("\$$_calculatedPrice")
-                      ],
-                    ),
-                  ],
-                ),
+      bottomNavigationBar: Material(
+        color: Colors.white,
+        child: TabBar(
+          controller: tabController,
+          indicatorColor: Colors.grey.shade100,
+          labelColor: Colors.blue,
+          tabs: <Widget>[
+            Tab(
+              icon: Icon(
+                Icons.home,
+                color: Colors.grey.shade400,
               ),
             ),
-          ),
+            Tab(
+              icon: Icon(
+                Icons.filter_list,
+                color: Colors.grey.shade400,
+              ),
+            ),
+            Tab(
+              icon: Icon(
+                Icons.settings,
+                color: Colors.grey.shade400,
+              ),
+            ),
+          ],
+        ),
+      ),
+      body: TabBarView(
+        controller: tabController,
+        children: <Widget>[
+          OverviewPage(),
+          Container(),
+          SettingsPage(),
         ],
       ),
-    );
-  }
-
-  void _calculateTax() {
-    setState(
-      () {
-        _calculatedPrice = double.parse(
-            (_itemPrice * (_includeTax ? _taxRate : 1)).toStringAsPrecision(4));
-      },
     );
   }
 }

@@ -12,9 +12,6 @@ void main() => runApp(
           primarySwatch: Colors.blue,
           fontFamily: 'Montserrat'
         ),
-        routes: {
-          '/': (context) => HomePage(),
-          '/settings': (context) => SettingsPage(),
-        },
+        home: HomePage(),
       ),
     );
