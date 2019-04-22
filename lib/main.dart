@@ -10,6 +10,7 @@ void main() => runApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.blue,
+          fontFamily: 'Montserrat'
         ),
         routes: {
           '/': (context) => HomePage(),

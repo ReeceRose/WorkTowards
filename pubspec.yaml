@@ -20,7 +20,14 @@ flutter:
   assets:
    - assets/images/logo.png
 
-  fonts:
-    - family: Bungee
+  fonts:  
+    - family: Montserrat
       fonts:
-        - asset: assets/fonts/Bungee-Regular.ttf
+        - asset: assets/fonts/Montserrat-Regular.ttf
+        - asset: assets/fonts/Montserrat-Bold.ttf
+          weight: 700 
+    - family: Inconsolata
+      fonts:
+        - asset: assets/fonts/Inconsolata-Regular.ttf
+        - asset: assets/fonts/Inconsolata-Bold.ttf
+          weight: 700 

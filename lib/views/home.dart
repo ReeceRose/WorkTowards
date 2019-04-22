@@ -12,17 +12,18 @@ class _HomePageState extends State<HomePage> {
   double _calculatedPrice = 0.0;
   @override
   Widget build(BuildContext context) {
-    double inputWidth = MediaQuery.of(context).size.width / 1.25;
+    double inputWidth = MediaQuery.of(context).size.width / 1.15;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0.0,
         centerTitle: true,
         title: Text(
-          'Work Towards',
+          'Home',
           style: TextStyle(
             color: Colors.black,
-            fontFamily: 'Bungee',
+            fontFamily: 'Inconsolata',
+            fontSize: 25.0,
           ),
         ),
         backgroundColor: Colors.white,
@@ -36,7 +37,7 @@ class _HomePageState extends State<HomePage> {
               width: inputWidth,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20.0),
-                color: Colors.grey.shade200,
+                color: Colors.grey.shade100,
               ),
               child: Padding(
                 padding: EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 15.0),
@@ -44,7 +45,6 @@ class _HomePageState extends State<HomePage> {
                   children: <Widget>[
                     TextField(
                       decoration: InputDecoration(
-                        labelStyle: TextStyle(fontFamily: 'Bungee'),
                         labelText: 'Enter Price',
                         fillColor: Colors.white,
                         border: OutlineInputBorder(
@@ -72,7 +72,6 @@ class _HomePageState extends State<HomePage> {
                           ),
                           TextField(
                             decoration: InputDecoration(
-                              labelStyle: TextStyle(fontFamily: 'Bungee'),
                               labelText: 'Enter Tax Rate',
                               fillColor: Colors.white,
                               border: OutlineInputBorder(
@@ -133,8 +132,8 @@ class _HomePageState extends State<HomePage> {
   void _calculateTax() {
     setState(
       () {
-        _calculatedPrice =
-            (_itemPrice * (_includeTax ? _taxRate : 1)).roundToDouble();
+        _calculatedPrice = double.parse(
+            (_itemPrice * (_includeTax ? _taxRate : 1)).toStringAsPrecision(4));
       },
     );
   }

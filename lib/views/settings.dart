@@ -6,12 +6,14 @@ class SettingsPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        elevation: 0.0,
         centerTitle: true,
         title: Text(
-          'Work Towards',
+          'Home',
           style: TextStyle(
             color: Colors.black,
-            fontFamily: 'Bungee',
+            fontFamily: 'Inconsolata',
+            fontSize: 25.0,
           ),
         ),
         backgroundColor: Colors.white,
