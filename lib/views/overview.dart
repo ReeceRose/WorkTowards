@@ -3,16 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_circular_chart/flutter_circular_chart.dart';
 
 class OverviewPage extends StatefulWidget {
+  bool _includeTax = true;
+  double _itemPrice = 0.0;
+  double _taxRate = 1;
+  double _calculatedPrice = 0.0;
   @override
   _OverviewPageState createState() => _OverviewPageState();
 }
 
 class _OverviewPageState extends State<OverviewPage> {
-  bool _includeTax = true;
-  double _itemPrice = 0.0;
-  double _taxRate = 1.13;
-  double _calculatedPrice = 0.0;
-
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -23,6 +22,7 @@ class _OverviewPageState extends State<OverviewPage> {
           padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
           child: Text(
             'Quick Calculate',
+            textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.subtitle,
           ),
         ),
@@ -44,10 +44,11 @@ class _OverviewPageState extends State<OverviewPage> {
                       borderSide: BorderSide(),
                     ),
                   ),
+                  textAlign: TextAlign.center,
                   onChanged: (value) {
                     setState(
                       () {
-                        _itemPrice = double.parse(value);
+                        widget._itemPrice = double.parse(value);
                       },
                     );
                     _calculateTax();
@@ -55,7 +56,7 @@ class _OverviewPageState extends State<OverviewPage> {
                   keyboardType: TextInputType.number,
                 ),
                 Visibility(
-                  visible: _includeTax,
+                  visible: widget._includeTax,
                   child: Column(
                     children: <Widget>[
                       SizedBox(
@@ -70,11 +71,12 @@ class _OverviewPageState extends State<OverviewPage> {
                             borderSide: BorderSide(),
                           ),
                         ),
+                        textAlign: TextAlign.center,
                         onChanged: (value) {
                           setState(
                             () {
                               // this will give us a number like 1.XX
-                              _taxRate = (double.parse(value) / 100) + 1;
+                              widget._taxRate = (double.parse(value) / 100) + 1;
                             },
                           );
                           _calculateTax();
@@ -89,13 +91,13 @@ class _OverviewPageState extends State<OverviewPage> {
                   children: <Widget>[
                     Text('Include Tax?'),
                     Switch(
-                      value: _includeTax,
+                      value: widget._includeTax,
                       onChanged: (value) {
                         setState(
                           () {
-                            _includeTax = value;
+                            widget._includeTax = value;
                             // reset the _taxRate
-                            if (!_includeTax) _taxRate = 1;
+                            if (!widget._includeTax) widget._taxRate = 1;
                           },
                         );
                         _calculateTax();
@@ -108,7 +110,7 @@ class _OverviewPageState extends State<OverviewPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Text('Total'),
-                    Text('\$$_calculatedPrice'),
+                    Text('\$${widget._calculatedPrice}'),
                   ],
                 ),
               ],
@@ -119,6 +121,7 @@ class _OverviewPageState extends State<OverviewPage> {
           padding: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 10.0),
           child: Text(
             'Saved Items',
+            textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.subtitle,
           ),
         ),
@@ -131,11 +134,38 @@ class _OverviewPageState extends State<OverviewPage> {
             padding: EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 15.0),
             child: Column(
               children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                Column(
                   children: <Widget>[
-                    _buildChart(title: 'Item One', completed: 25.0),
-                    _buildChart(title: 'Item Two', completed: 100.0),
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 15.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          _buildChart(title: 'Item One', completed: 25.0),
+                          _buildChart(title: 'Item Two', completed: 100.0),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 15.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          _buildChart(title: 'Item One', completed: 25.0),
+                          _buildChart(title: 'Item Two', completed: 100.0),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 15.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          _buildChart(title: 'Item One', completed: 25.0),
+                          _buildChart(title: 'Item Two', completed: 100.0),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ],
@@ -149,8 +179,9 @@ class _OverviewPageState extends State<OverviewPage> {
   void _calculateTax() {
     setState(
       () {
-        _calculatedPrice = double.parse(
-            (_itemPrice * (_includeTax ? _taxRate : 1)).toStringAsPrecision(4));
+        widget._calculatedPrice = double.parse(
+            (widget._itemPrice * (widget._includeTax ? widget._taxRate : 1))
+                .toStringAsPrecision(4));
       },
     );
   }
@@ -167,10 +198,11 @@ class _OverviewPageState extends State<OverviewPage> {
       width: deviceWidth / 2.5,
       height: deviceWidth / 2.5,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(
-            Radius.circular(15.0),
-          ),
-          border: Border.all(color: Colors.grey.shade500)),
+        borderRadius: BorderRadius.all(
+          Radius.circular(15.0),
+        ),
+        border: Border.all(color: Colors.grey.shade500),
+      ),
       child: Column(
         children: <Widget>[
           AnimatedCircularChart(
@@ -199,7 +231,7 @@ class _OverviewPageState extends State<OverviewPage> {
             edgeStyle: SegmentEdgeStyle.round,
             percentageValues: true,
           ),
-          Text(title)
+          Text(title),
         ],
       ),
     );
