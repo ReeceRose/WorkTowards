@@ -9,7 +9,10 @@ void main() => runApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.blue,
-          fontFamily: 'Montserrat'
+          fontFamily: 'Montserrat',
+          textTheme: TextTheme(
+            subtitle: TextStyle(fontSize: 20.0),
+          ),
         ),
         home: HomePage(),
       ),

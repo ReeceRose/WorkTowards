@@ -23,14 +23,10 @@ class _OverviewPageState extends State<OverviewPage> {
           padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
           child: Text(
             'Quick Calculate',
-            style: TextStyle(
-              fontSize: 16.0,
-              color: Colors.black,
-            ),
+            style: Theme.of(context).textTheme.subtitle,
           ),
         ),
         Container(
-          // width: containerWidth,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20.0),
             color: Colors.grey.shade50,
@@ -123,10 +119,7 @@ class _OverviewPageState extends State<OverviewPage> {
           padding: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 10.0),
           child: Text(
             'Saved Items',
-            style: TextStyle(
-              fontSize: 16.0,
-              color: Colors.black,
-            ),
+            style: Theme.of(context).textTheme.subtitle,
           ),
         ),
         Container(
@@ -141,7 +134,7 @@ class _OverviewPageState extends State<OverviewPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    _buildChart(title: 'Item One', completed: 15.0),
+                    _buildChart(title: 'Item One', completed: 25.0),
                     _buildChart(title: 'Item Two', completed: 100.0),
                   ],
                 ),
@@ -200,6 +193,7 @@ class _OverviewPageState extends State<OverviewPage> {
                 rankKey: 'progress',
               ),
             ],
+            duration: Duration(milliseconds: 1250),
             holeLabel: '${completed.toStringAsPrecision(4)}%',
             chartType: CircularChartType.Radial,
             edgeStyle: SegmentEdgeStyle.round,
