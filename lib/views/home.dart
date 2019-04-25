@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'overview.dart';
+import 'list.dart';
 import 'settings.dart';
 
 class HomePage extends StatefulWidget {
@@ -84,7 +85,7 @@ class _HomePageState extends State<HomePage>
         controller: tabController,
         children: <Widget>[
           OverviewPage(),
-          Container(),
+          ListPage(),
           SettingsPage(),
         ],
       ),
