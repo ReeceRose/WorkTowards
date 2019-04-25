@@ -4,6 +4,11 @@ import 'overview.dart';
 import 'settings.dart';
 
 class HomePage extends StatefulWidget {
+  bool includeTax = true;
+  double itemPrice = 0.0;
+  double taxRate = 1;
+  double calculatedPrice = 0.0;
+
   @override
   _HomePageState createState() => _HomePageState();
 }
