@@ -127,7 +127,7 @@ class _OverviewPageState extends State<OverviewPage> {
       () {
         widget.calculatedPrice = double.parse(
             (widget.itemPrice * (widget.includeTax ? widget.taxRate : 1))
-                .toStringAsPrecision(4));
+                .toStringAsPrecision(5));
       },
     );
   }
