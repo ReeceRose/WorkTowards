@@ -11,7 +11,8 @@ void main() => runApp(
           primarySwatch: Colors.blue,
           fontFamily: 'Montserrat',
           textTheme: TextTheme(
-            subtitle: TextStyle(fontSize: 20.0),
+            title: TextStyle(fontSize: 20.0),
+            body1: TextStyle(fontSize: 14.0),
           ),
         ),
         home: HomePage(),

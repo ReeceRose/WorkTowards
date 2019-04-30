@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 
 // import 'package:flutter_circular_chart/flutter_circular_chart.dart';
 
@@ -26,7 +27,7 @@ class _OverviewPageState extends State<OverviewPage> {
           child: Text(
             'Quick Calculate',
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.subtitle,
+            style: Theme.of(context).textTheme.title,
           ),
         ),
         Container(
@@ -49,7 +50,8 @@ class _OverviewPageState extends State<OverviewPage> {
                       borderSide: BorderSide(),
                     ),
                   ),
-                  controller: TextEditingController(text: widget.hourlyRate.toString()),
+                  controller:
+                      TextEditingController(text: widget.hourlyRate.toString()),
                   enabled: false,
                   textAlign: TextAlign.center,
                   keyboardType: TextInputType.number,
