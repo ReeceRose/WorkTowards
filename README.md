@@ -9,16 +9,8 @@
 </h4>
 
 <p align="center">
-  <a href="https://trello.com/b/jxvBEKrm/work-towards" target="_blank">Trello</a> •
-  <a href="" target="_blank">Google Play</a> •
-  <a href="" target="_blank">Apple Store</a>
-</p>
-
-<p align="center">
   <a href="#about">About</a> •
   <a href="#features">Features</a> •
-  <a href="#features">Links</a> •
-  <a href="#features">Screenshots</a> •
   <a href="#license">License</a>
 </p>
 
@@ -27,14 +19,14 @@
 
 Work Towards is a simple mobile application which will allow a user to quickly calculate how long they will have to work in order to 'afford' a certain product.
 
+[Trello](https://trello.com/b/jxvBEKrm/work-towards) | [Project link](https://reecerose.com/projects/worktowards)
+
+<!-- Google play badge -->
+<!-- Apple store badge -->
+
 ## Features
 
 - Quick calculate
-
-## Screenshots
-<img src="https://static.reecerose.com/images/projects/worktowards/example-one.png" alt="Example One" title="Example One" height=500px>
-
-<img src="https://static.reecerose.com/images/projects/worktowards/example-two.png" alt="Example Two" title="Example Two" height=500px>
 
 ## License
 
