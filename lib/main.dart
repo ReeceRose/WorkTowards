@@ -10,8 +10,8 @@ void main() => runApp(
           primarySwatch: Colors.blue,
           fontFamily: 'Montserrat',
           textTheme: TextTheme(
-            title: TextStyle(fontSize: 16.5),
-            body1: TextStyle(fontSize: 14.0),
+            title: TextStyle(fontSize: 18.0),
+            body1: TextStyle(fontSize: 15.0),
           ),
         ),
         home: HomePage(),
