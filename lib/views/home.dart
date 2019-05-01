@@ -31,27 +31,21 @@ class _HomePageState extends State<HomePage>
       appBar: AppBar(
         elevation: 0.5,
         centerTitle: true,
-        title: Image.asset(
-          'assets/images/logo.png',
-          width: 150,
-          fit: BoxFit.cover,
+        title: Text(
+          'Work Towards',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            // fontFamily: 'Inconsolata',
+            fontSize: 22.0,
+          ),
         ),
-        // title: Text(
-        //   'Work Towards',
-        //             style: TextStyle(
-        //     color: Colors.black,
-        //     fontFamily: 'Inconsolata',
-        //     fontSize: 25.0,
-        //   ),
-        // ),
         actions: <Widget>[
-          // IconButton(
-          //   onPressed: () {},
-          //   icon: Icon(Icons.add),
-          //   color: Colors.black,
-          // )
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.add),
+          )
         ],
-        backgroundColor: Colors.white,
       ),
       bottomNavigationBar: Material(
         color: Colors.white,
