@@ -7,11 +7,17 @@ void main() => runApp(
         title: 'Work Towards',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primaryColor: Color.fromARGB(255, 34, 148, 240),
           fontFamily: 'Montserrat',
           textTheme: TextTheme(
-            title: TextStyle(fontSize: 18.0),
-            body1: TextStyle(fontSize: 15.0),
+            title: TextStyle(
+              fontSize: 18.0,
+              color: Color.fromARGB(255, 6, 6, 6),
+            ),
+            body1: TextStyle(
+              fontSize: 15.0,
+              color: Color.fromARGB(255, 6, 6, 6),
+            ),
           ),
         ),
         home: HomePage(),

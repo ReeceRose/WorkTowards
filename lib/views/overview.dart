@@ -163,7 +163,7 @@ class _OverviewPageState extends State<OverviewPage> {
             (widget.itemPrice * (widget.includeTax ? widget.taxRate : 1))
                 .toStringAsPrecision(5));
         widget.hoursNeeded =
-            (widget.calculatedPrice / widget.hourlyRate).toStringAsPrecision(2);
+            (widget.calculatedPrice / widget.hourlyRate).toStringAsPrecision(3);
       },
     );
   }

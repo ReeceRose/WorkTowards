@@ -46,6 +46,7 @@ class _HomePageState extends State<HomePage>
             icon: Icon(Icons.add),
           )
         ],
+        backgroundColor: Theme.of(context).primaryColor,
       ),
       bottomNavigationBar: Material(
         color: Colors.white,
