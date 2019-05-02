@@ -34,9 +34,8 @@ class _HomePageState extends State<HomePage>
         title: Text(
           'Work Towards',
           style: TextStyle(
-            color: Colors.white,
+            color: Theme.of(context).primaryColor,
             fontWeight: FontWeight.bold,
-            // fontFamily: 'Inconsolata',
             fontSize: 22.0,
           ),
         ),
@@ -44,9 +43,10 @@ class _HomePageState extends State<HomePage>
           IconButton(
             onPressed: () {},
             icon: Icon(Icons.add),
+            color: Colors.black,
           )
         ],
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Colors.white,
       ),
       bottomNavigationBar: Material(
         color: Colors.white,
