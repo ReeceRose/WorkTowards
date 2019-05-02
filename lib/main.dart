@@ -4,14 +4,22 @@ import 'views/home.dart';
 
 void main() => runApp(
       MaterialApp(
-        title: 'Flutter UI',
-        initialRoute: '/',
+        title: 'Work Towards',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primaryColor: Color.fromARGB(255, 34, 148, 240),
+          fontFamily: 'Montserrat',
+          textTheme: TextTheme(
+            title: TextStyle(
+              fontSize: 18.0,
+              color: Color.fromARGB(255, 6, 6, 6),
+            ),
+            body1: TextStyle(
+              fontSize: 15.0,
+              color: Color.fromARGB(255, 6, 6, 6),
+            ),
+          ),
         ),
-        routes: {
-          '/': (context) => HomePage(),
-        },
+        home: HomePage(),
       ),
     );
