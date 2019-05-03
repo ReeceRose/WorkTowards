@@ -27,9 +27,7 @@ class _HomePageState extends State<HomePage>
   }
 
   void _handleTabSelection() {
-    setState(() {
-      
-    });
+    setState(() {});
   }
 
   @override
@@ -70,21 +68,24 @@ class _HomePageState extends State<HomePage>
             Tab(
               icon: Icon(
                 Icons.home,
-                color: _tabController.index == 0 ? activeColour : inactiveColour,
+                color:
+                    _tabController.index == 0 ? activeColour : inactiveColour,
               ),
               text: 'Home',
             ),
             Tab(
               icon: Icon(
                 Icons.filter_list,
-                color: _tabController.index == 1 ? activeColour : inactiveColour,
+                color:
+                    _tabController.index == 1 ? activeColour : inactiveColour,
               ),
               text: 'Saved',
             ),
             Tab(
               icon: Icon(
                 Icons.settings,
-                color: _tabController.index == 2 ? activeColour : inactiveColour,
+                color:
+                    _tabController.index == 2 ? activeColour : inactiveColour,
               ),
               text: 'Settings',
             ),
