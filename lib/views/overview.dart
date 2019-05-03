@@ -33,7 +33,7 @@ class _OverviewPageState extends State<OverviewPage> {
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20.0),
-            color: Colors.grey.shade50,
+            color: Colors.white,
           ),
           child: Padding(
             padding: EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 15.0),

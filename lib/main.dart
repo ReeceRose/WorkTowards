@@ -8,6 +8,8 @@ void main() => runApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primaryColor: Color.fromARGB(255, 34, 148, 240),
+          backgroundColor: Colors.grey.shade50,
+          bottomAppBarColor: Colors.grey.shade600,
           fontFamily: 'Montserrat',
           textTheme: TextTheme(
             title: TextStyle(
