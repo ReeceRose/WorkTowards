@@ -4,7 +4,7 @@ import 'package:rxdart/subjects.dart';
 class CalculatorBloc {
   double _price = 0.0;
   bool _includeTax = true;
-  double _taxRate = 1;
+  double _taxRate = 0;
   double _calculatedPrice = 0.0;
   double _hoursNeeded = 0.0;
 
@@ -51,7 +51,6 @@ class CalculatorBloc {
   }
 
   set currentTaxRate(double taxRate) {
-    print(taxRate);
     _taxRate = taxRate;
     _taxRateController.add(_taxRate);
     this.calculatePrice();

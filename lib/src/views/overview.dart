@@ -23,7 +23,7 @@ class OverviewPage extends StatelessWidget {
 
     // this will leave the field empty and not 1.0 if a value isn't set
     String taxRate = _calculatorBloc.currentTaxRate.toString();
-    _taxRateController.text = taxRate == '1.0' ? '' : taxRate.replaceAll('.0', '');
+    _taxRateController.text = taxRate == '0.0' ? '' : taxRate.replaceAll('.0', '');
     _taxRateController.addListener(() {
       String value = _taxRateController.text;
       if (value.isEmpty) value = '0';
