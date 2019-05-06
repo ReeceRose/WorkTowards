@@ -1,42 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'overview.dart';
 import 'list.dart';
 import 'settings.dart';
 
 class HomePage extends StatefulWidget {
-  bool includeTax = true;
-  double itemPrice = 0.0;
-  double taxRate = 1;
-  double calculatedPrice = 0.0;
-
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
-  TabController tabController;
+  TabController _tabController;
 
   @override
   void initState() {
     super.initState();
-    tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(length: 3, vsync: this);
+    _tabController.addListener(_handleTabSelection);
+  }
+
+  void _handleTabSelection() {
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
+    final Color activeColour = Theme.of(context).primaryColor;
+    final Color inactiveColour = Theme.of(context).bottomAppBarColor;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
-        elevation: 0.5,
+        elevation: 1.0,
         centerTitle: true,
         title: Text(
           'Work Towards',
           style: TextStyle(
-            color: Colors.white,
+            color: Theme.of(context).primaryColor,
             fontWeight: FontWeight.bold,
-            // fontFamily: 'Inconsolata',
             fontSize: 22.0,
           ),
         ),
@@ -44,40 +46,49 @@ class _HomePageState extends State<HomePage>
           IconButton(
             onPressed: () {},
             icon: Icon(Icons.add),
+            color: Colors.black,
           )
         ],
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Theme.of(context).backgroundColor,
       ),
       bottomNavigationBar: Material(
-        color: Colors.white,
+        elevation: 7.0,
+        color: Theme.of(context).backgroundColor,
         child: TabBar(
-          controller: tabController,
-          indicatorColor: Colors.grey.shade100,
-          labelColor: Colors.blue,
+          controller: _tabController,
+          indicatorColor: inactiveColour,
+          unselectedLabelColor: Colors.black,
+          labelColor: activeColour,
           tabs: <Widget>[
             Tab(
               icon: Icon(
                 Icons.home,
-                color: Colors.grey.shade400,
+                color:
+                    _tabController.index == 0 ? activeColour : inactiveColour,
               ),
+              text: 'Home',
             ),
             Tab(
               icon: Icon(
                 Icons.filter_list,
-                color: Colors.grey.shade400,
+                color:
+                    _tabController.index == 1 ? activeColour : inactiveColour,
               ),
+              text: 'Saved',
             ),
             Tab(
               icon: Icon(
                 Icons.settings,
-                color: Colors.grey.shade400,
+                color:
+                    _tabController.index == 2 ? activeColour : inactiveColour,
               ),
+              text: 'Settings',
             ),
           ],
         ),
       ),
       body: TabBarView(
-        controller: tabController,
+        controller: _tabController,
         children: <Widget>[
           OverviewPage(),
           ListPage(),
