@@ -28,6 +28,9 @@ class WorkTowards extends StatelessWidget {
             color: Colors.grey.shade600,
           ),
         ),
+        buttonTheme: ButtonThemeData(
+          buttonColor: Theme.of(context).primaryColor,
+        ),
         fontFamily: 'Montserrat',
         textTheme: TextTheme(
           title: TextStyle(

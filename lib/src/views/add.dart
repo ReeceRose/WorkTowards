@@ -7,7 +7,6 @@ class AddPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // resizeToAvoidBottomPadding: false,
       appBar: ReturnAppBar(),
       body: SingleChildScrollView(
         child: Container(

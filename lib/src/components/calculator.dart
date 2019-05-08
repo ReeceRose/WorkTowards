@@ -10,6 +10,7 @@ import 'package:WorkTowards/src/components/input/text_input.dart';
 class Calculator extends StatelessWidget {
   bool includeTitleInput;
   final _calculatorBloc = getIt.get<CalculatorBloc>();
+  final _titleController = TextEditingController();
   final _priceController = TextEditingController();
   final _taxRateController = TextEditingController();
 
@@ -59,7 +60,7 @@ class Calculator extends StatelessWidget {
               textAlign: TextAlign.center,
               keyboardType: TextInputType.number,
             ),
-            _buildTitleInputWithStream(),
+            _buildTitleInput(),
             _buildPriceInputWithStream(),
             _buildIncludeTaxSwitchWithStream(),
             StreamBuilder(
@@ -105,26 +106,33 @@ class Calculator extends StatelessWidget {
                 );
               },
             ),
+            RaisedButton(
+              onPressed: () {
+                // submit
+              },
+              child: Text(
+                'Add',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            )
           ],
         ),
       ),
     );
   }
 
-  Visibility _buildTitleInputWithStream() {
+  Visibility _buildTitleInput() {
     return Visibility(
       visible: includeTitleInput,
       child: Container(
         padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-        child: StreamBuilder(
-          stream: _calculatorBloc.taxRateStream$, // temp
-          builder: (BuildContext context, AsyncSnapshot snap) {
-            return TextInput(
-              label: 'Enter Item Name',
-              hint: 'Xbox One',
-              controller: _taxRateController, // temp
-            );
-          },
+        child: TextInput(
+          label: 'Enter Item Name',
+          hint: 'Xbox One',
+          controller: _titleController, // temp
         ),
       ),
     );
