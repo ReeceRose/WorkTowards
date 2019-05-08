@@ -4,14 +4,16 @@ import 'package:WorkTowards/main.dart';
 import 'package:WorkTowards/src/bloc/calculator_bloc.dart';
 
 import 'package:WorkTowards/src/components/input/number_input.dart';
-// import 'package:WorkTowards/src/components/input/text_input.dart';
+import 'package:flutter/widgets.dart';
+import 'package:WorkTowards/src/components/input/text_input.dart';
 
 class Calculator extends StatelessWidget {
+  bool includeTitleInput;
   final _calculatorBloc = getIt.get<CalculatorBloc>();
   final _priceController = TextEditingController();
   final _taxRateController = TextEditingController();
 
-  Calculator() {
+  Calculator({this.includeTitleInput = false}) {
     String currentPrice = _calculatorBloc.currentPrice.toString();
     // this will leave the field empty and not 0.0 if a value isn't set
     _priceController.text =
@@ -57,44 +59,9 @@ class Calculator extends StatelessWidget {
               textAlign: TextAlign.center,
               keyboardType: TextInputType.number,
             ),
-            SizedBox(
-              height: 10,
-            ),
-            StreamBuilder(
-              stream: _calculatorBloc.priceStream$,
-              builder: (BuildContext context, AsyncSnapshot snap) {
-                return NumberInput(
-                  label: 'Enter Price',
-                  hint: '200',
-                  controller: _priceController,
-                );
-              },
-            ),
-            StreamBuilder(
-              stream: _calculatorBloc.includeTaxStream$,
-              builder: (BuildContext context, AsyncSnapshot snap) {
-                return Visibility(
-                  visible: _calculatorBloc.includeTax,
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      StreamBuilder(
-                        stream: _calculatorBloc.taxRateStream$,
-                        builder: (BuildContext context, AsyncSnapshot snap) {
-                          return NumberInput(
-                            label: 'Enter Tax Rate',
-                            hint: '13',
-                            controller: _taxRateController,
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                );
-              },
-            ),
+            _buildTitleInputWithStream(),
+            _buildPriceInputWithStream(),
+            _buildIncludeTaxSwitchWithStream(),
             StreamBuilder(
               stream: _calculatorBloc.includeTaxStream$,
               initialData: true,
@@ -142,6 +109,64 @@ class Calculator extends StatelessWidget {
         ),
       ),
     );
-    // return
+  }
+
+  Visibility _buildTitleInputWithStream() {
+    return Visibility(
+      visible: includeTitleInput,
+      child: Container(
+        padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+        child: StreamBuilder(
+          stream: _calculatorBloc.taxRateStream$, // temp
+          builder: (BuildContext context, AsyncSnapshot snap) {
+            return TextInput(
+              label: 'Enter Item Name',
+              hint: 'Xbox One',
+              controller: _taxRateController, // temp
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  StreamBuilder _buildPriceInputWithStream() {
+    return StreamBuilder(
+      stream: _calculatorBloc.priceStream$,
+      builder: (BuildContext context, AsyncSnapshot snap) {
+        return Container(
+          padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+          child: NumberInput(
+            label: 'Enter Price',
+            hint: '200',
+            controller: _priceController,
+          ),
+        );
+      },
+    );
+  }
+
+  StreamBuilder _buildIncludeTaxSwitchWithStream() {
+    return StreamBuilder(
+      stream: _calculatorBloc.includeTaxStream$,
+      builder: (BuildContext context, AsyncSnapshot snap) {
+        return Visibility(
+          visible: _calculatorBloc.includeTax,
+          child: Container(
+            padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+            child: StreamBuilder(
+              stream: _calculatorBloc.taxRateStream$,
+              builder: (BuildContext context, AsyncSnapshot snap) {
+                return NumberInput(
+                  label: 'Enter Tax Rate',
+                  hint: '13',
+                  controller: _taxRateController,
+                );
+              },
+            ),
+          ),
+        );
+      },
+    );
   }
 }

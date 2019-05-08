@@ -7,28 +7,33 @@ class AddPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // resizeToAvoidBottomPadding: false,
       appBar: ReturnAppBar(),
-      body: Container(
-        width: MediaQuery.of(context).size.width,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
-              child: Text(
-                'New item',
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.title,
+      body: SingleChildScrollView(
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
+                child: Text(
+                  'New item',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.title,
+                ),
               ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20.0),
-                color: Colors.white,
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.0),
+                  color: Colors.white,
+                ),
+                child: Calculator(
+                  includeTitleInput: true,
+                ),
               ),
-              child: Calculator(),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
