@@ -1,24 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
-import 'src/bloc/calculator_bloc.dart';
-
-import 'src/views/home.dart';
-
-
+import 'package:WorkTowards/src/bloc/calculator_bloc.dart';
+import 'package:WorkTowards/src/views/home.dart';
 
 GetIt getIt = GetIt();
 
 void main() {
   getIt.registerSingleton<CalculatorBloc>(CalculatorBloc());
-  runApp(
-    MaterialApp(
+  runApp(WorkTowards());
+}
+
+class WorkTowards extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
       title: 'Work Towards',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: Color.fromARGB(255, 34, 148, 240),
         backgroundColor: Colors.grey.shade50,
         bottomAppBarColor: Colors.grey.shade600,
+        appBarTheme: AppBarTheme(
+          elevation: 1.0,
+          color: Colors.grey.shade50,
+          iconTheme: IconThemeData(
+            color: Colors.grey.shade600,
+          ),
+        ),
+        buttonTheme: ButtonThemeData(
+          buttonColor: Theme.of(context).primaryColor,
+        ),
         fontFamily: 'Montserrat',
         textTheme: TextTheme(
           title: TextStyle(
@@ -32,6 +44,6 @@ void main() {
         ),
       ),
       home: HomePage(),
-    ),
-  );
+    );
+  }
 }

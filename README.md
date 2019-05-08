@@ -27,6 +27,7 @@ Work Towards is a simple mobile application which will allow a user to quickly c
 ## Features
 
 - Quick calculate
+- RxDart state management
 
 ## License
 
