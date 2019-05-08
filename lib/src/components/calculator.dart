@@ -9,12 +9,14 @@ import 'package:WorkTowards/src/components/input/text_input.dart';
 
 class Calculator extends StatelessWidget {
   bool includeTitleInput;
+  bool includeSubmitButton;
   final _calculatorBloc = getIt.get<CalculatorBloc>();
   final _titleController = TextEditingController();
   final _priceController = TextEditingController();
   final _taxRateController = TextEditingController();
 
-  Calculator({this.includeTitleInput = false}) {
+  Calculator(
+      {this.includeTitleInput = false, this.includeSubmitButton = false}) {
     String currentPrice = _calculatorBloc.currentPrice.toString();
     // this will leave the field empty and not 0.0 if a value isn't set
     _priceController.text =
@@ -106,22 +108,16 @@ class Calculator extends StatelessWidget {
                 );
               },
             ),
-            RaisedButton(
-              onPressed: () {
-                // submit
-              },
-              child: Text(
-                'Add',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            )
+            _buildSubmitButton(context),
           ],
         ),
       ),
     );
+  }
+
+  void _submit(BuildContext context) {
+    // TODO: Submit
+    Navigator.pop(context);
   }
 
   Visibility _buildTitleInput() {
@@ -175,6 +171,22 @@ class Calculator extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  Visibility _buildSubmitButton(BuildContext context) {
+    return Visibility(
+      visible: includeSubmitButton,
+      child: RaisedButton(
+        onPressed: () => _submit(context),
+        child: Text(
+          'Add',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
     );
   }
 }

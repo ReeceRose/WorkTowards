@@ -29,6 +29,7 @@ class AddPage extends StatelessWidget {
                 ),
                 child: Calculator(
                   includeTitleInput: true,
+                  includeSubmitButton: true,
                 ),
               ),
             ],
