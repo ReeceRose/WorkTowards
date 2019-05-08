@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:WorkTowards/main.dart';
 import 'package:WorkTowards/src/bloc/calculator_bloc.dart';
 
+import 'package:WorkTowards/src/components/input/number_input.dart';
+// import 'package:WorkTowards/src/components/input/text_input.dart';
+
 class Calculator extends StatelessWidget {
   final _calculatorBloc = getIt.get<CalculatorBloc>();
   final _priceController = TextEditingController();
@@ -58,19 +61,10 @@ class Calculator extends StatelessWidget {
           StreamBuilder(
             stream: _calculatorBloc.priceStream$,
             builder: (BuildContext context, AsyncSnapshot snap) {
-              return TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Enter Price',
-                  hintText: '200',
-                  fillColor: Colors.white,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(25.0),
-                    borderSide: BorderSide(),
-                  ),
-                ),
+              return NumberInput(
+                label: 'Enter Price',
+                hint: '200',
                 controller: _priceController,
-                textAlign: TextAlign.center,
-                keyboardType: TextInputType.number,
               );
             },
           ),
@@ -87,19 +81,10 @@ class Calculator extends StatelessWidget {
                     StreamBuilder(
                       stream: _calculatorBloc.taxRateStream$,
                       builder: (BuildContext context, AsyncSnapshot snap) {
-                        return TextFormField(
-                          decoration: InputDecoration(
-                            labelText: 'Enter Tax Rate',
-                            hintText: '13',
-                            fillColor: Colors.white,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(25.0),
-                              borderSide: BorderSide(),
-                            ),
-                          ),
-                          textAlign: TextAlign.center,
+                        return NumberInput(
+                          label: 'Enter Tax Rate',
+                          hint: '13',
                           controller: _taxRateController,
-                          keyboardType: TextInputType.number,
                         );
                       },
                     ),
