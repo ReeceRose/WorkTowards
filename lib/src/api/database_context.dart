@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:WorkTowards/src/model/item.dart';
 import 'package:objectdb/objectdb.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -21,6 +22,23 @@ class DatabaseContext {
 
   Future<ObjectDB> get db async {
     return _database == null ? await _initializeDatabase() : _database;
+  }
+
+  insertItem(Item item) async {
+    ObjectDB database = await db;
+    database.insert({'title': item.title });
+  }
+
+  Future<List<Map<dynamic, dynamic>>> getAllItems() async {
+    ObjectDB database = await db;
+    // await clearAllItems();
+    return await database.find({});
+  }
+
+  Future<bool> clearAllItems() async {
+    ObjectDB database = await db;
+    await database.remove({});
+    return true;
   }
 
   close() async {

@@ -1,5 +1,5 @@
 class Item {
-  String name;
+  String title;
   double price;
   double taxRate;
   bool includeTax;
@@ -10,7 +10,7 @@ class Item {
   double hoursNeeded;
 
   Item(
-      {this.name = "",
+      {this.title = "",
       this.price = 0.0,
       this.taxRate = 0.0,
       this.includeTax = false}) {

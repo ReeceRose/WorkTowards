@@ -1,3 +1,5 @@
+import 'package:WorkTowards/src/api/database_context.dart';
+import 'package:WorkTowards/src/model/item.dart';
 import 'package:flutter/material.dart';
 
 import 'package:WorkTowards/main.dart';
@@ -10,6 +12,7 @@ import 'package:WorkTowards/src/components/input/text_input.dart';
 class Calculator extends StatelessWidget {
   bool includeTitleInput;
   bool includeSubmitButton;
+  String title;
   final _calculatorBloc = getIt.get<CalculatorBloc>();
   final _titleController = TextEditingController();
   final _priceController = TextEditingController();
@@ -18,6 +21,14 @@ class Calculator extends StatelessWidget {
   Calculator(
       {this.includeTitleInput = false, this.includeSubmitButton = false}) {
     String currentPrice = _calculatorBloc.currentPrice.toString();
+
+    _titleController.text = _calculatorBloc.currentTitle;
+
+    _titleController.addListener(() {
+      title = _titleController.text;
+      _calculatorBloc.currentTitle = title;
+    });
+
     // this will leave the field empty and not 0.0 if a value isn't set
     _priceController.text =
         currentPrice == '0.0' ? '' : currentPrice.replaceAll('.0', '');
@@ -115,21 +126,35 @@ class Calculator extends StatelessWidget {
     );
   }
 
-  void _submit(BuildContext context) {
-    // TODO: Submit
+  void _submit(BuildContext context) async {
+    // This is a temporary solution
+    Item item = Item(
+      title: _titleController.text,
+      price: double.parse(_priceController.text),
+      taxRate: double.parse(_taxRateController.text),
+      includeTax: _calculatorBloc.includeTax,
+    );
+    // Clear state
+    _calculatorBloc.clear();
+    await DatabaseContext.database.insertItem(item);
     Navigator.pop(context);
   }
 
   Visibility _buildTitleInput() {
     return Visibility(
       visible: includeTitleInput,
-      child: Container(
-        padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-        child: TextInput(
-          label: 'Enter Item Name',
-          hint: 'Xbox One',
-          controller: _titleController, // temp
-        ),
+      child: StreamBuilder(
+        stream: _calculatorBloc.titleStream$,
+        builder: (BuildContext context, AsyncSnapshot snap) {
+          return Container(
+            padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+            child: TextInput(
+              label: 'Enter Item Name',
+              hint: 'Xbox One',
+              controller: _titleController,
+            ),
+          );
+        },
       ),
     );
   }

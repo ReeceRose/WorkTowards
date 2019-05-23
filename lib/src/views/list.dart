@@ -1,13 +1,54 @@
+import 'package:WorkTowards/src/api/database_context.dart';
 import 'package:flutter/material.dart';
 
 class ListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[Text('List saved items')],
-      ),
+    return FutureBuilder(
+      future: DatabaseContext.database.getAllItems(),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        // if (!snapshot.hasData) {
+        //   return Center(
+        //     child: CircularProgressIndicator(),
+        //   );
+        // } else {
+        List<Map<dynamic, dynamic>> items = snapshot.data;
+        if (items == null) {
+          return Container();
+        } else {
+          return ListView.builder(
+            itemCount: items.length == null ? 0 : items.length,
+            itemBuilder: (BuildContext context, int index) {
+              Map<dynamic, dynamic> item = items.elementAt(index);
+              return Dismissible(
+                key: Key(index.toString()),
+                onDismissed: (direction) {
+                  items.removeAt(index);
+                  // DatabaseContext.c.removeName(item['_id']);
+                },
+                direction: DismissDirection.endToStart,
+                background: Container(
+                  alignment: AlignmentDirectional.centerEnd,
+                  color: Colors.red,
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
+                    child: Icon(
+                      Icons.delete,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                child: ListTile(
+                  leading: Icon(Icons.label),
+                  title: Text(
+                    item["title"],
+                  ),
+                ),
+              );
+            },
+          );
+        }
+      },
     );
   }
 }

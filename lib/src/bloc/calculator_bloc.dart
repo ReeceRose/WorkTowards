@@ -2,13 +2,14 @@ import 'package:rxdart/rxdart.dart';
 import 'package:rxdart/subjects.dart';
 
 class CalculatorBloc {
+  String _title = "";
   double _price = 0.0;
   bool _includeTax = true;
   double _taxRate = 0;
   double _calculatedPrice = 0.0;
   double _hoursNeeded = 0.0;
 
-  BehaviorSubject _calculatorController;
+  BehaviorSubject<String> _titleController;
   BehaviorSubject<double> _priceController;
   BehaviorSubject<bool> _includeTaxController;
   BehaviorSubject<double> _taxRateController;
@@ -16,7 +17,7 @@ class CalculatorBloc {
   BehaviorSubject<double> _hoursNeededController;
 
   CalculatorBloc() {
-    _calculatorController = BehaviorSubject();
+    _titleController = BehaviorSubject<String>.seeded(this._title);
     _priceController = BehaviorSubject<double>.seeded(this._price);
     _includeTaxController = BehaviorSubject<bool>.seeded(this._includeTax);
     _taxRateController = BehaviorSubject<double>.seeded(this._taxRate);
@@ -25,18 +26,25 @@ class CalculatorBloc {
     _hoursNeededController = BehaviorSubject<double>.seeded(this._hoursNeeded);
   }
 
-  Observable get calculatorStream$ => _calculatorController.stream;
+  Observable get titleStream$ => _titleController.stream;
   Observable get priceStream$ => _priceController.stream;
   Observable get includeTaxStream$ => _includeTaxController.stream;
   Observable get taxRateStream$ => _taxRateController.stream;
   Observable get calculatedPriceStream$ => _calculatedPriceController.stream;
   Observable get hoursNeededStream$ => _hoursNeededController.stream;
 
+  String get currentTitle => _titleController.value;
   double get currentPrice => _priceController.value;
   bool get includeTax => _includeTaxController.value;
   double get currentTaxRate => _taxRateController.value;
   double get calculatedPrice => _calculatedPriceController.value;
   double get hoursNeeded => _hoursNeededController.value;
+
+  set currentTitle(String title) {
+    _title = title;
+    _titleController.add(_title);
+    this.calculatePrice();
+  }
 
   set currentPrice(double price) {
     _price = price;
@@ -73,8 +81,16 @@ class CalculatorBloc {
         double.parse((_calculatedPrice / 20.0).toStringAsPrecision(3));
   }
 
+  void clear() {
+    currentTitle = "";
+    currentPrice = 0.0;
+    includeTax = true;
+    currentTaxRate = 0.0;
+    calculatePrice();
+  }
+
   dispose() {
-    _calculatorController.close();
+    _titleController.close();
     _priceController.close();
     _includeTaxController.close();
     _taxRateController.close();
