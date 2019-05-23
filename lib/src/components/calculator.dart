@@ -127,7 +127,6 @@ class Calculator extends StatelessWidget {
   }
 
   void _submit(BuildContext context) async {
-    // This is a temporary solution
     Item item = Item(
       title: _titleController.text,
       price: double.parse(_priceController.text),
