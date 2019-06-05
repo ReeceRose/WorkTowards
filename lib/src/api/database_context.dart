@@ -26,7 +26,7 @@ class DatabaseContext {
 
   insertItem(Item item) async {
     ObjectDB database = await db;
-    database.insert({'title': item.title });
+    database.insert({'title': item.title, 'price': item.price, 'taxRate': item.taxRate, 'includeTax': item.includeTax });
   }
 
   Future<List<Map<dynamic, dynamic>>> getAllItems() async {
