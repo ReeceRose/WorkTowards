@@ -29,6 +29,11 @@ class DatabaseContext {
     database.insert({'title': item.title, 'price': item.price, 'taxRate': item.taxRate, 'includeTax': item.includeTax });
   }
 
+  Future<List<Map<dynamic, dynamic>>> getItemById(String id) async {
+    ObjectDB database = await db;
+    return await database.find({'_id': id});
+  }
+
   Future<List<Map<dynamic, dynamic>>> getAllItems() async {
     ObjectDB database = await db;
     // await clearAllItems();

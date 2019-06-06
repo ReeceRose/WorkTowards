@@ -1,3 +1,4 @@
+import 'package:WorkTowards/src/views/details.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_circular_chart/flutter_circular_chart.dart';
@@ -20,51 +21,68 @@ class ListPage extends StatelessWidget {
     );
   }
 
+  void _openDetailsPage(BuildContext context, String id) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => DetailsPage(
+              itemId: id,
+            ),
+      ),
+    );
+  }
+
   ListView _buildListView(
       {BuildContext context, List<Map<dynamic, dynamic>> items}) {
     List<Widget> children = List<Widget>();
     for (var i = 0; i <= items.length - 1; i += 2) {
       var item = items.elementAt(i);
       List<Widget> rowItems = List<Widget>();
-      rowItems.add(_buildChart(context: context, title: item["title"]));
+      rowItems.add(
+        InkWell(
+          onTap: () => _openDetailsPage(context, item["_id"]),
+          child: _buildChart(
+            context: context,
+            title: item["title"],
+          ),
+        ),
+      );
       try {
         var secondItem = items.elementAt(i + 1);
         rowItems.add(
-          _buildChart(
-            context: context,
-            title: secondItem["title"],
+          InkWell(
+            onTap: () => _openDetailsPage(context, secondItem["_id"]),
+            child: _buildChart(
+              context: context,
+              title: secondItem["title"],
+            ),
           ),
         );
       } catch (_) {
         // rowItems.add(Container());
       }
       children.add(
-        InkWell(
-          onTap: () => {
-            print('clicked on item')
-          },
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20.0),
-              color: Colors.grey.shade50,
-            ),
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
-              child: Column(
-                children: <Widget>[
-                  Column(
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 10.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: rowItems,
-                        ),
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20.0),
+            color: Colors.grey.shade50,
+          ),
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
+            child: Column(
+              children: <Widget>[
+                Column(
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 10.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: rowItems,
                       ),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ),

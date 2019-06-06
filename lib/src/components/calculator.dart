@@ -18,8 +18,12 @@ class Calculator extends StatelessWidget {
   final _priceController = TextEditingController();
   final _taxRateController = TextEditingController();
 
+  bool editMode = true;
+
   Calculator(
-      {this.includeTitleInput = false, this.includeSubmitButton = false}) {
+      {this.includeTitleInput = false,
+      this.includeSubmitButton = false,
+      this.editMode}) {
     String currentPrice = _calculatorBloc.currentPrice.toString();
 
     _titleController.text = _calculatorBloc.currentTitle;
@@ -204,7 +208,7 @@ class Calculator extends StatelessWidget {
       child: RaisedButton(
         onPressed: () => _submit(context),
         child: Text(
-          'Add',
+          editMode == true ? 'Edit' : 'Add',
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
