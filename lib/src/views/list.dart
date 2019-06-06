@@ -14,24 +14,64 @@ class ListPage extends StatelessWidget {
         if (items == null) {
           return Container();
         } else {
-          return ListView.builder(
-            itemCount: items.length == null ? 0 : items.length,
-            itemBuilder: (BuildContext context, int index) {
-              Map<dynamic, dynamic> item = items.elementAt(index);
-              return Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
-                    child: _buildChart(title: item["title"], context: context),
-                  ),
-                ],
-              );
-            },
-          );
+          return _buildListView(context: context, items: items);
         }
       },
+    );
+  }
+
+  ListView _buildListView(
+      {BuildContext context, List<Map<dynamic, dynamic>> items}) {
+    List<Widget> children = List<Widget>();
+    for (var i = 0; i <= items.length - 1; i += 2) {
+      var item = items.elementAt(i);
+      List<Widget> rowItems = List<Widget>();
+      rowItems.add(_buildChart(context: context, title: item["title"]));
+      try {
+        var secondItem = items.elementAt(i + 1);
+        rowItems.add(
+          _buildChart(
+            context: context,
+            title: secondItem["title"],
+          ),
+        );
+      } catch (_) {
+        // rowItems.add(Container());
+      }
+      children.add(
+        InkWell(
+          onTap: () => {
+            print('clicked on item')
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20.0),
+              color: Colors.grey.shade50,
+            ),
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
+              child: Column(
+                children: <Widget>[
+                  Column(
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 10.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: rowItems,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+    return ListView(
+      children: children,
     );
   }
 
@@ -45,8 +85,8 @@ class ListPage extends StatelessWidget {
     final GlobalKey<AnimatedCircularChartState> _chartKey =
         new GlobalKey<AnimatedCircularChartState>();
     return Container(
-      width: deviceWidth / 2.5,
-      height: deviceWidth / 2.5,
+      width: deviceWidth / 2.1,
+      height: deviceWidth / 2.1,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(
           Radius.circular(15.0),

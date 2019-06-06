@@ -130,7 +130,7 @@ class Calculator extends StatelessWidget {
     Item item = Item(
       title: _titleController.text,
       price: double.parse(_priceController.text),
-      taxRate: double.parse(_taxRateController.text),
+      taxRate: double.parse(_taxRateController.text) ?? 0,
       includeTax: _calculatorBloc.includeTax,
     );
     // Clear state
