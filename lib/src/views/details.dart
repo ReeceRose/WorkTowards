@@ -19,7 +19,10 @@ class DetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: ReturnAppBar(),
+      appBar: ReturnAppBar(
+        editMode: true,
+        itemId: itemId,
+      ),
       body: FutureBuilder(
         future: item,
         builder: (BuildContext context, AsyncSnapshot snap) {

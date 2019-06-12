@@ -59,6 +59,11 @@ class DatabaseContext {
     return await database.find({});
   }
 
+  void removeItem(String id) async {
+    ObjectDB database = await db;
+    await database.remove({'_id': id});
+  }
+
   Future<bool> clearAllItems() async {
     ObjectDB database = await db;
     await database.remove({});
