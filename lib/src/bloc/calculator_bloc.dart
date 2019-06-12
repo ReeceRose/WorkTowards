@@ -76,9 +76,22 @@ class CalculatorBloc {
 
   void calculatePrice() {
     calculatedPrice = double.parse(
-        (_price * (_includeTax ? ((_taxRate / 100) + 1) : 1)).toStringAsPrecision(5));
+        (_price * (_includeTax ? ((_taxRate / 100) + 1) : 1))
+            .toStringAsPrecision(5));
     hoursNeeded =
         double.parse((_calculatedPrice / 20.0).toStringAsPrecision(3));
+  }
+
+  void load({
+    String title = "",
+    double price = 0,
+    double taxRate = 0.0,
+    bool tax = true,
+  }) {
+    currentTitle = title;
+    currentPrice = price;
+    currentTaxRate = taxRate;
+    includeTax = tax;
   }
 
   void clear() {

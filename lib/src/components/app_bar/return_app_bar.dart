@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
+import 'package:WorkTowards/main.dart';
+import 'package:WorkTowards/src/bloc/calculator_bloc.dart';
+
 class ReturnAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final _calculatorBloc = getIt.get<CalculatorBloc>();
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -16,6 +20,7 @@ class ReturnAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       leading: IconButton(
         onPressed: () {
+          _calculatorBloc.clear();
           Navigator.pop(context);
         },
         icon: Icon(Icons.arrow_back_ios),
