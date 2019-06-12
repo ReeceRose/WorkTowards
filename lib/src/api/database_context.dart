@@ -26,7 +26,26 @@ class DatabaseContext {
 
   insertItem(Item item) async {
     ObjectDB database = await db;
-    database.insert({'title': item.title, 'price': item.price, 'taxRate': item.taxRate, 'includeTax': item.includeTax });
+    database.insert({
+      'title': item.title,
+      'price': item.price,
+      'taxRate': item.taxRate,
+      'includeTax': item.includeTax
+    });
+  }
+
+  updateItem({String id, Item item}) async {
+    ObjectDB database = await db;
+    print(item.includeTax);
+    print(id);
+    database.update({
+      '_id': id
+    }, {
+      'title': item.title,
+      'price': item.price,
+      'taxRate': item.taxRate,
+      'includeTax': item.includeTax
+    });
   }
 
   Future<List<Map<dynamic, dynamic>>> getItemById(String id) async {

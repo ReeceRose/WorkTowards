@@ -12,18 +12,20 @@ import 'package:WorkTowards/src/components/input/text_input.dart';
 class Calculator extends StatelessWidget {
   bool includeTitleInput;
   bool includeSubmitButton;
+  bool editMode = true;
+  String itemId;
+
   String title;
+
   final _calculatorBloc = getIt.get<CalculatorBloc>();
   final _titleController = TextEditingController();
   final _priceController = TextEditingController();
   final _taxRateController = TextEditingController();
-
-  bool editMode = true;
-
   Calculator(
       {this.includeTitleInput = false,
       this.includeSubmitButton = false,
-      this.editMode}) {
+      this.editMode,
+      this.itemId}) {
     String currentPrice = _calculatorBloc.currentPrice.toString();
 
     _titleController.text = _calculatorBloc.currentTitle;
@@ -139,7 +141,11 @@ class Calculator extends StatelessWidget {
     );
     // Clear state
     _calculatorBloc.clear();
-    await DatabaseContext.database.insertItem(item);
+    if (editMode) {
+      await DatabaseContext.database.updateItem(id: itemId, item: item);
+    } else {
+      await DatabaseContext.database.insertItem(item);
+    }
     Navigator.pop(context);
   }
 

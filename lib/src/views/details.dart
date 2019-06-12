@@ -56,6 +56,7 @@ class DetailsPage extends StatelessWidget {
                       includeTitleInput: true,
                       includeSubmitButton: true,
                       editMode: true,
+                      itemId: itemId,
                     ),
                   ),
                 ],
