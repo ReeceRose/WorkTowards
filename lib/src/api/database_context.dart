@@ -36,8 +36,6 @@ class DatabaseContext {
 
   updateItem({String id, Item item}) async {
     ObjectDB database = await db;
-    print(item.includeTax);
-    print(id);
     database.update({
       '_id': id
     }, {
