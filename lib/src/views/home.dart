@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:WorkTowards/src/components/page_template.dart';
+import 'package:WorkTowards/src/components/app_bar/main_app_bar.dart';
+import 'package:WorkTowards/src/components/app_bar/main_bottom_navigation_bar.dart';
+
 import 'package:WorkTowards/src/views/overview.dart';
 import 'package:WorkTowards/src/views/list.dart';
 import 'package:WorkTowards/src/views/settings.dart';
@@ -19,20 +21,19 @@ class _HomePageState extends State<HomePage>
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
-    _tabController.addListener(_handleTabSelection);
-  }
-
-  void _handleTabSelection() {
-    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    return PageTemplate(
-      tabController: _tabController,
+    return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
+      appBar: MainAppBar(),
       body: TabBarView(
         controller: _tabController,
         children: <Widget>[OverviewPage(), ListPage(), SettingsPage()],
+      ),
+      bottomNavigationBar: MainBottomNavigationBar(
+        tabController: _tabController,
       ),
     );
   }
