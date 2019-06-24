@@ -13,6 +13,8 @@ dependencies:
   flutter_circular_chart: ^0.1.0
   rxdart: ^0.22.0
   get_it: ^1.0.3
+  objectdb: ^1.0.5
+  path_provider: ^1.1.0
 
 dev_dependencies:
   flutter_test:
